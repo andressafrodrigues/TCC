@@ -1,23 +1,26 @@
 $("button.btn-login").click(function(){
-		var data = $("#formLogin").serialize();
-			
+		var data = $("#formLogin").serialize();		
+		alert('oi');	
 		$.ajax({
 			type : 'POST',
-			url  : 'login.php',
+			url  : 'ajax/login.php',
 			data : data,
-			dataType: 'json',
+			dataType: 'script',
 			beforeSend: function()
-			{	
+			{
 				$("#btn-login").html('Validando ...');
 			},
-			success :  function(response){						
-				if(response.codigo == "1"){	
-					$("#btn-login").html('Entrar');
+			error: function(response) {
+				alert("Error!");
+			}
+			,
+			success :  function(response){
+				if(response){	
+					$("button.btn-login").html('Entrar');
 					$("#login-alert").css('display', 'none')
 					window.location.href = "home.php";
-				}
-				else{			
-					$("#btn-login").html('Entrar');
+				}else{
+					$("button.btn-login").html('Entrar');
 					$("#login-alert").css('display', 'block')
 					$("#mensagem").html('<strong>Erro! </strong>' + response.mensagem);
 				}

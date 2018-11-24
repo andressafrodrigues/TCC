@@ -24,7 +24,7 @@
             </div>
     
             <p>Para entrar, efetue o login.</p>
-            <form class="m-t" id="formLogin" action="ajax/login.php" role="form" method="POST">
+            <form class="m-t" id="formLogin" role="form" method="POST">
                 <div class="form-group">
                     <input type="email" name="email" class="form-control" placeholder="Insira o e-mail" required="">
                 </div>
@@ -42,8 +42,10 @@
     <!-- Mainly scripts -->
  <?php 
     include("config/footer.php");
-    // include("assets/js/login.js");
  ?>
+
+ <script src="assets/js/login.js"></script>
+
 </body>
 
 </html>
