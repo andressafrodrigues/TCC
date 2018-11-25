@@ -88,3 +88,5 @@
 </div>
 
  <script src="assets/js/usuario.js" type="text/javascript"></script>
+ <script src="assets/js/geolocation.js" type="text/javascript"></script>
+

@@ -31,10 +31,25 @@
                             echo($menu);
                         ?>
                     </nav>
-                </div>
+
                 <div class="wrapper wrapper-content">
                 <h3><strong>Próximos</strong></h3>
                     <div class="wrapper wrapper-content animated fadeInRight">
+                      
+<!-- Andy-->
+                      <h2 id="text-center">Enter Location: </h2>
+                      <form id="location-form">
+                        <input type="text" id="location-input" class="form-control form-control-lg">
+                        <br>
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                      </form>
+                      <div class="card-block" id="formatted-address"></div>
+                      <div class="card-block" id="address-components"></div>
+                      <div class="card-block" id="geometry"></div>
+<!-- /Andy-->
+                      
+                      
+                      
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="contact-box">
@@ -74,6 +89,7 @@
         </div>
         <!-- Mainly scripts -->
         <script src="assets/js/login.js"></script>
+        <script src="assets/js/geolocation.js"></script>
     </body>
 
 </html>

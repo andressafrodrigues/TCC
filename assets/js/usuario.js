@@ -177,7 +177,7 @@
                 limpa_formulário_cep();
             }
         });
-
+      
         $("#editaUser_cep").blur(function() {
             //Nova variável "cep" somente com dígitos.
             var cep = $(this).val().replace(/\D/g, '');
