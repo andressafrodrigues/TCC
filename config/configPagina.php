@@ -24,7 +24,7 @@
                                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                                     <meta http-equiv="X-UA-Compatible" content="IE=edge">
                                     <title>GIA</title>
-
+                                    
                                     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
                                     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet">
                                     <link href="assets/css/plugins/toastr/toastr.min.css" rel="stylesheet">
@@ -88,11 +88,16 @@
                 }
                 if($id == '2'){
                     $result =   '
-                                    <!-- Mainly scripts -->
+
+                                       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
                                     <!--<script src="js/jquery-3.1.1.min.js"></script>-->
                                     <script src="js/bootstrap.min.js"></script>
                                     <script type="text/javascript" src="jquery-1.2.6.pack.js"></script>
-                            <script type="text/javascript" src="jquery.maskedinput-1.1.4.pack.js"/></script>
+                                     <script type="text/javascript" src="jquery.maskedinput-1.1.4.pack.js"/></script>
+
+                                    <script src="https://www.calcmaps.com/js/scripts.js?v=2"></script>
+
+                                     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"/></script>
                                     <!-- Custom and plugin javascript -->
                                     <script src="js/inspinia.js"></script>
                                     <script src="js/plugins/pace/pace.min.js"></script>

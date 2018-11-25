@@ -39,10 +39,21 @@
                             </li>
                         </ul>
                     </nav>
-                </div>
+
                 <div class="wrapper wrapper-content">
                     B.E.T.A.
-                </div>
+
+     
+                    <h2 id="text-center">Enter Location: </h2>
+                    <form id="location-form">
+                      <input type="text" id="location-input" class="form-control form-control-lg">
+                      <br>
+                      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </form>
+                    <div class="card-block" id="formatted-address"></div>
+                    <div class="card-block" id="address-components"></div>
+                    <div class="card-block" id="geometry"></div>
+                  </div>
                  <?php 
                     include("config/footer.php");
                  ?>
@@ -50,6 +61,7 @@
         </div>
         <!-- Mainly scripts -->
         <script src="assets/js/login.js"></script>
+        <script src="assets/js/geolocation.js"></script>
     </body>
 
 </html>
