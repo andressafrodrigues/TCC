@@ -1,10 +1,5 @@
-
+<?php session_start(); ?>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>iCleanIt - Login!</title>
     <?php 
         require("init.php");
         include ("config/connectionSQL.php");
@@ -15,37 +10,66 @@
         $header = $config->returnconfiguracao($config);
         echo($header);
     ?>
-    </head>
-
-        <div id="page-wrapper" class="gray-bg">
-        <div class="row border-bottom">
-        <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            <!-- <form role="search" class="navbar-form-custom" action="search_results.html">
-                <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-                </div>
-            </form> -->
-        </div>
-
-                            <?php 
-                                $config = new configuracaoPagina();
-                                $config->tipo =   "menu";
-                                $config->id   =   "1";
-                                $menu = $config->returnconfiguracao($config);
-                                echo($menu);
-                            ?>
-                            </li>
-                        </ul>
+    <?php
+        include($diretorioRoot."modals/editUsuario.php");
+    ?>
+    <body class="top-navigation">
+        <div id="wrapper">
+            <div id="page-wrapper" class="gray-bg">
+                <div class="row border-bottom">
+                    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                        <div class="navbar-header">
+                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                                <i class="fa fa-book"></i> Agendamentos
+                            </a>
+                        </div>
+                        <?php 
+                            $config = new configuracaoPagina();
+                            $config->tipo =   "menu";
+                            $config->id   =   "1";
+                            $menu = $config->returnconfiguracao($config);
+                            echo($menu);
+                        ?>
                     </nav>
                 </div>
                 <div class="wrapper wrapper-content">
-                    B.E.T.A.
+                <h3><strong>Próximos</strong></h3>
+                    <div class="wrapper wrapper-content animated fadeInRight">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="contact-box">
+                                    <a class="row" href="profile.html">
+                                        <div class="col-4">
+                                            <div class="text-center">
+                                                <img alt="image" class="rounded-circle m-t-xs img-fluid" src="https://thenypost.files.wordpress.com/2018/06/180608-donald-trump.jpg?quality=90&strip=all&w=618&h=410&crop=1">
+                                                <div class="m-t-xs font-bold">
+                                                    Fodão do EUA
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <h3>
+                                                <strong>Senhor Trump</strong>
+                                            </h3>
+                                            <p>
+                                                <i class="fa fa-map-marker"></i> 
+                                                Não Informado! a 3000000Km<br>
+                                            </p>
+                                            <address>
+                                                <strong>Twitter, Inc.</strong><br>
+                                                Sigiloso<br>
+                                                <abbr title="Phone">P:</abbr> (XXX) XXX-XXXX
+                                            </address>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php 
+                        include("config/footer.php");
+                    ?>
                 </div>
-                 <?php 
-                    include("config/footer.php");
-                 ?>
             </div>
         </div>
         <!-- Mainly scripts -->

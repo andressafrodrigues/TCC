@@ -1,5 +1,5 @@
 <?php  
-$dir  = str_replace('\\','/',$_SERVER['DOCUMENT_ROOT']."/Projetos/iCleanIt/");
+$dir  = str_replace('\\','/',$_SERVER['DOCUMENT_ROOT']."/Projetos/ICleanerIT/");
 $servername = "localhost";
 $username = "root";
 $password = null;

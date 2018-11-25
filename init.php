@@ -8,7 +8,7 @@
 		$dirA 	= 	$row["diretorio"];
 	}
 	if ($dirA == ""){
-		$query = $db->query("replace into tbconfigdir (diretorio) values ('".$dir."');");
+		$query = $conn->query("replace into tbconfigdir (diretorio) values ('".$dir."');");
 		if ($query){}
 	}
 	$diretorioRoot = $dirA;

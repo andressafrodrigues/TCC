@@ -4,26 +4,25 @@ $("button.btn-login").click(function(){
 			type : 'POST',
 			url  : 'ajax/usuario/login.php',
 			data : data,
-			dataType: 'script',
+			dataType: 'Json',
 			beforeSend: function()
 			{
 				$("#btn-login").html('Validando ...');
 			},
-			error: function(response) {
-				alert("Error!");
-			}
-			,
-			success :  function(response){
-				console.log(response);
-				alert('sucesso');
-				if(response){	
+			error: function(ret) {
+				swal("ERROU!","ERRRRRROOOOOOUUUUUU!","error");
+			},
+			success :  function(ret){
+				alert(ret.idUser);
+				if(ret.retorno) {
 					$("button.btn-login").html('Entrar');
 					$("#login-alert").css('display', 'none')
 					window.location.href = "home.php";
-				}else{
-					$("button.btn-login").html('Entrar');
-					$("#login-alert").css('display', 'block')
-					$("#mensagem").html('<strong>Erro! </strong>' + response.mensagem);
+				}else {
+					//$("button.btn-login").html('Entrar');
+					//$("#login-alert").css('display', 'block')
+					//$("#mensagem").html('<strong>Erro! </strong>' + ret.mensagem);
+					swal("ERROU!",ret.mensagem,"error");
 				}
 		    }
 		});

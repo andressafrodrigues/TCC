@@ -23,7 +23,7 @@
                                     <meta charset="utf-8">
                                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                                     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                                    <title>GIA</title>
+                                    <title>ICleanerIT</title>
 
                                     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
                                     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -52,6 +52,8 @@
                                     <link href="assets/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
                                     <link href="assets/css/plugins/summernote/summernote.css" rel="stylesheet">
                                     <link href="assets/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+                                    <!-- Sweet Alert -->
+                                    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
                                     <link href="assets/css/animate.css" rel="stylesheet">
                                     <link href="assets/css/style.css" rel="stylesheet">
@@ -92,7 +94,8 @@
                                     <!--<script src="js/jquery-3.1.1.min.js"></script>-->
                                     <script src="js/bootstrap.min.js"></script>
                                     <script type="text/javascript" src="jquery-1.2.6.pack.js"></script>
-                            <script type="text/javascript" src="jquery.maskedinput-1.1.4.pack.js"/></script>
+                                    <script type="text/javascript" src="jquery.maskedinput-1.1.4.pack.js"/></script>
+
                                     <!-- Custom and plugin javascript -->
                                     <script src="js/inspinia.js"></script>
                                     <script src="js/plugins/pace/pace.min.js"></script>
@@ -201,6 +204,9 @@
                                     <!-- SUMMERNOTE -->
                                     <script src="js/plugins/summernote/summernote.min.js"></script>
 
+                                    <!-- Sweet alert -->
+                                    <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
                                     <script>
                                         $(document).ready(function(){
                                             $("#summernote").summernote({
@@ -255,41 +261,31 @@
                         }
             }elseif($tipo == "menu"){
                 if($id == "1"){
-                    $result =   '        
-
-            <ul class="nav navbar-top-links navbar-right">
-
-                <li class="dropdown">
-                <li>
-                    <a href="login.html">
-                        <i class="fa fa-sign-out"></i> Log out
-                    </a>
-                </li>
-
-
-
-                 <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks"></i>  
-
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="mailbox.html" class="dropdown-item">
-                                <div>
-                                    <i class="fa fa-gear fa-fw"></i> Editar Perfil
-                                    
-                                </div>
-                            </a>
-                        </li>
-
-
-                    </ul>
-                </li>
-
-            </ul>
-        </nav>
-        </div>';
+                    $result =   '
+                                    <ul class="nav navbar-top-links navbar-right">
+                                        <li class="dropdown">
+                                            <li>
+                                                <a href="login.html">
+                                                    <i class="fa fa-sign-out"></i> Log out
+                                                </a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                                    <i class="fa fa-tasks"></i>  
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-alerts">
+                                                    <li>
+                                                        <a href="#" onclick="editarUsuario()" class="dropdown-item">
+                                                            <div>
+                                                                <i class="fa fa-gear fa-fw"></i> Editar Perfil
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </li>
+                                    </ul>
+                                ';
                 }
             }
             return $result;
