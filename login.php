@@ -57,7 +57,7 @@
     include("config/footer.php");
  ?>
 
- <script src="assets/js/login.js"></script>
+ <script src="assets/js/login.js" type="text/javascript"></script>
 
 </body>
 
