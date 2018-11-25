@@ -9,10 +9,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>iCleanIt - Login!</title>
+<?php 
+    require("init.php");
+    include ("config/connectionSQL.php");
+    include ("config/configPagina.php");
 
-<?php include("config/header.php");?>
+    $config = new configuracaoPagina();
+    $config->tipo =   "header";
+    $config->id   =   "1";
+    $header = $config->returnconfiguracao($config);
+    echo($header);
+?>
 </head>
-
+<?php
+    include($diretorioRoot."modals/cadPessoa.php");
+?>
 <body class="gray-bg">
 
     <div class="middle-box text-center loginscreen animated fadeInDown">
@@ -33,7 +44,9 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-login block full-width m-b">Login</button>
                 <p class="text-muted text-center"><small>Não possui uma conta?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="register.html">Criar conta</a>
+                <a class="btn btn-sm btn-white btn-block" data-toggle="modal" data-target="#cadastroUsu">Criar conta</a>
+
+
             </form>
             <p class="m-t"> <small>Andressa Felipe Rodrigues &copy; 2018</small> </p>
         </div>
