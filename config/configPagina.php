@@ -56,6 +56,10 @@
                                     <link href="assets/css/animate.css" rel="stylesheet">
                                     <link href="assets/css/style.css" rel="stylesheet">
 
+                                    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+                                            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+                                            crossorigin="anonymous"></script>
+
                                     <style type="text/css">
                                         .float-add {
                                             position: fixed;
@@ -85,9 +89,10 @@
                 if($id == '2'){
                     $result =   '
                                     <!-- Mainly scripts -->
-                                    <script src="js/jquery-3.1.1.min.js"></script>
+                                    <!--<script src="js/jquery-3.1.1.min.js"></script>-->
                                     <script src="js/bootstrap.min.js"></script>
-
+                                    <script type="text/javascript" src="jquery-1.2.6.pack.js"></script>
+                            <script type="text/javascript" src="jquery.maskedinput-1.1.4.pack.js"/></script>
                                     <!-- Custom and plugin javascript -->
                                     <script src="js/inspinia.js"></script>
                                     <script src="js/plugins/pace/pace.min.js"></script>
@@ -250,36 +255,41 @@
                         }
             }elseif($tipo == "menu"){
                 if($id == "1"){
-                    $result =   '<nav class="navbar-default navbar-static-side" role="navigation">
-                                    <div class="sidebar-collapse">
-                                        <ul class="nav metismenu" id="side-menu">
-                                            <li class="nav-header">
-                                                <img alt="image" class="img-circle" src="img/Icon/Icon_CEB.png"/>
-                                                </span>
-                                                <a href="assets/#" class="navbar-brand">CEB</a>
-                                            </li>
-                                            <li>
-                                                <a aria-expanded="false" role="button" href="assets/index.php"><i class="fa fa-dashboard"></i>Inicio</a>
-                                            </li>
-                                            <li>
-                                                <a aria-expanded="false" role="button" href="assets/livros.php"><i class="fa fa-book"></i>Livros</a>
-                                            </li>
-                                            <li>
-                                                <a aria-expanded="false" role="button" href="assets/categorias.php"><i class="fa fa-bookmark"></i>Categorias</a>
-                                            </li>
-                                            <li>
-                                                <a aria-expanded="false" role="button" href="assets/autores.php"><i class="fa fa-certificate"></i>Autores</a>
-                                            </li>
-                                            <li>
-                                                <a aria-expanded="false" role="button" href="assets/editoras.php"><i class="fa fa-archive"></i>Editoras</a>
-                                            </li>
-                                            <li>
-                                                <a aria-expanded="false" role="button" href="assets/usuarios.php"><i class="fa fa-users"></i>Usuarios</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </nav>
-                                ';
+                    $result =   '        
+
+            <ul class="nav navbar-top-links navbar-right">
+
+                <li class="dropdown">
+                <li>
+                    <a href="login.html">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+
+
+
+                 <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks"></i>  
+
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="mailbox.html" class="dropdown-item">
+                                <div>
+                                    <i class="fa fa-gear fa-fw"></i> Editar Perfil
+                                    
+                                </div>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+        </div>';
                 }
             }
             return $result;
