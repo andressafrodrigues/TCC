@@ -1,9 +1,8 @@
 $("button.btn-login").click(function(){
 		var data = $("#formLogin").serialize();		
-		alert('oi');	
 		$.ajax({
 			type : 'POST',
-			url  : 'ajax/login.php',
+			url  : 'ajax/usuario/login.php',
 			data : data,
 			dataType: 'script',
 			beforeSend: function()
@@ -15,6 +14,8 @@ $("button.btn-login").click(function(){
 			}
 			,
 			success :  function(response){
+				console.log(response);
+				alert('sucesso');
 				if(response){	
 					$("button.btn-login").html('Entrar');
 					$("#login-alert").css('display', 'none')
