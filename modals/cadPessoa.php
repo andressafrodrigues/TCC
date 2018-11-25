@@ -81,9 +81,10 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" value="fecharModal_cadastroUsu" id="fecharModal_cadastroUsu" data-dismiss="modal">Fechar</button>
                 <button type="button" value="Salvar" id="salvar" class="btn btn-primary" onclick="cadastrarUsuario()" >Salvar</button>
+
             </div>
         </div>
     </div>
 </div>
 
- <script src="assets/js/usuario.js"></script>
+ <script src="assets/js/usuario.js" type="text/javascript"></script>
