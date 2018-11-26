@@ -15,6 +15,12 @@
         .then((value) => {
             switch (value) {
                 case "YESS":
+                    var cep = document.getElementById('cep').value;
+                    var geoloc = geocode(cep);
+                    console.log(geoloc);
+                    var latLong = geoloc.latitude+","+geoloc.longitude;
+                    document.getElementById('localizacao').value = latLong;
+
                     var data = $("#cadastroUser").serialize(); 
                     pageurl = 'ajax/usuario/cadastro.php';
                     $.ajax({
@@ -177,7 +183,7 @@
                 limpa_formulário_cep();
             }
         });
-
+      
         $("#editaUser_cep").blur(function() {
             //Nova variável "cep" somente com dígitos.
             var cep = $(this).val().replace(/\D/g, '');
