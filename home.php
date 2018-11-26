@@ -12,6 +12,8 @@
     ?>
     <?php
         include($diretorioRoot."modals/editUsuario.php");
+        include($diretorioRoot."modals/agendaServico.php");
+        include($diretorioRoot."modals/agendamentos.php");
     ?>
     <body class="top-navigation">
         <div id="wrapper">
@@ -19,7 +21,7 @@
                 <div class="row border-bottom">
                     <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
                         <div class="navbar-header">
-                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#" onclick="agendamentos()">
                                 <i class="fa fa-book"></i> Agendamentos
                             </a>
                         </div>
@@ -31,23 +33,25 @@
                             echo($menu);
                         ?>
                     </nav>
-                <div class="wrapper wrapper-content">
-                <h3><strong>Próximos</strong></h3>
-                    <div class="wrapper wrapper-content animated fadeInRight">
-                        <div class="row" id="dadosAutonomos">
+                    <div class="wrapper wrapper-content">
+                        <div class="wrapper wrapper-content animated fadeInRight">
+                            <div class="row" id="dadosAutonomos">
+                            </div>
                         </div>
+                        <?php
+                            include("config/footer.php");
+                        ?>
                     </div>
-                    <?php 
-                        include("config/footer.php");
-                    ?>
                 </div>
             </div>
         </div>
         <!-- Mainly scripts -->
         <script src="assets/js/login.js"></script>
+        <script src="assets/js/agenda.js"></script>
         <script src="assets/js/geolocation.js"></script>
         <script>
             exibeProximos30KM();
+            exibeAgendamentosParaAutonomos();
         </script>
     </body>
 
