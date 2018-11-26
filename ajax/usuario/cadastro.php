@@ -17,6 +17,7 @@ $bairro            = $_POST['bairro'];
 $uf                = $_POST['uf'];
 $autonomo          = $_POST['autonomo'];
 $celular           = $_POST['celular'];
+$localizacao       = $_POST['localizacao'];
 
 $cadPessoa = new Pessoa();
 $cadPessoa->nomePessoa = $nomePessoa;
@@ -32,6 +33,7 @@ $cadPessoa->autonomo = $autonomo;
 $cadPessoa->celular = $celular;
 $cadPessoa->email = $email;
 $cadPessoa->senha = $senha;
+$cadPessoa->localizacao = $localizacao;
 
 if ($cadPessoa->cadastrarPessoa($cadPessoa)){
 	$retorno = true;
