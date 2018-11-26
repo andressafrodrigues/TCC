@@ -52,11 +52,11 @@
         </div>
     </div>
 
-    <!-- Mainly scripts -->
  <?php 
     include("config/footer.php");
  ?>
 
+ <script src="assets/js/geolocation.js"></script>
  <script src="assets/js/login.js" type="text/javascript"></script>
 
 </body>

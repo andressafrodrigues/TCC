@@ -18,6 +18,24 @@ class Pessoa
 	public $celular;
 	public $email;
 	public $senha;
+	public $localizacao;
+
+
+	public function distancia($lat1, $lon1, $lat2, $lon2) {
+		$lat1 = deg2rad($lat1);
+		$lat2 = deg2rad($lat2);
+		$lon1 = deg2rad($lon1);
+		$lon2 = deg2rad($lon2);
+
+		$latD = $lat2 - $lat1;
+		$lonD = $lon2 - $lon1;
+
+		$dist = 2 * asin(sqrt(pow(sin($latD / 2), 2) +
+		cos($lat1) * cos($lat2) * pow(sin($lonD / 2), 2)));
+		$dist = $dist * 6371;
+
+		return number_format($dist, 2, '.', '');
+	}
 
 	public function login($usuario) {
 		$return = false;
@@ -67,17 +85,18 @@ class Pessoa
 		$numero          = $classe->numero;
 		$descricao       = $classe->descricao;
 		$cidade          = $classe->cidade;
-	    $bairro          = $classe->bairro;
-	    $uf              = $classe->uf;
-	    $autonomo        = $classe->autonomo;
-	    $celular         = $classe->celular;
-	    $email           = $classe->email;
-	    $senha           = $classe->senha;
+		$bairro          = $classe->bairro;
+		$uf              = $classe->uf;
+		$autonomo        = $classe->autonomo;
+		$celular         = $classe->celular;
+		$email           = $classe->email;
+		$senha           = $classe->senha;
+		$localizacao     = $classe->localizacao;
 
-	    include("../../config/connectionSQL.php");
+		include("../../config/connectionSQL.php");
 
-		$sql = "INSERT INTO tbpessoa (nome, sobrenome, cep, rua, numero, descricao, cidade, bairro, uf, autonomo, celular, email, senha) VALUES ('$nomePessoa', '$sobrenomePessoa', '$cep', '$rua', '$numero', '$descricao', '$cidade', '$bairro', '$uf', '$autonomo', '$celular', '$email', '$senha');";
- 
+		$sql = "INSERT INTO tbpessoa (nome, sobrenome, cep, rua, numero, descricao, cidade, bairro, uf, autonomo, celular, email, senha, localizacao) VALUES ('$nomePessoa', '$sobrenomePessoa', '$cep', '$rua', '$numero', '$descricao', '$cidade', '$bairro', '$uf', '$autonomo', '$celular', '$email', '$senha', '$localizacao');";
+
 		if ($conn->query($sql)) {
 			$return = true;
 		} else {
@@ -131,12 +150,12 @@ class Pessoa
 		$numero          	= 	$classe->numero;
 		$descricao       	= 	$classe->descricao;
 		$cidade          	= 	$classe->cidade;
-	    $bairro          	= 	$classe->bairro;
-	    $uf              	= 	$classe->uf;
-	    $autonomo        	= 	$classe->autonomo;
-	    $celular         	= 	$classe->celular;
-	    $email           	= 	$classe->email;
-	    $senha           	= 	$classe->senha;
+		$bairro          	= 	$classe->bairro;
+		$uf              	= 	$classe->uf;
+		$autonomo        	= 	$classe->autonomo;
+		$celular         	= 	$classe->celular;
+		$email           	= 	$classe->email;
+		$senha           	= 	$classe->senha;
 		$objetoPessoa		=	new \stdClass();
 		$mensagem = "Dados incorretos, revise os seguintes campos: ";
 		if ($idPessoa <= 0){
@@ -169,19 +188,19 @@ class Pessoa
 		}
 		if ($dadosValidos){
 			$qry	=	"UPDATE tbpessoa SET 
-				autonomo 	= '".$autonomo."', 
-				nome 		= '".$nomePessoa."', 
-				sobrenome 	= '".$sobrenomePessoa."', 
-				email 		= '".$email."', 
-				celular 	= '".$celular."', 
-				senha 		= '".$senha."', 
-				descricao	= '".$descricao."', 
-				cep 		= '".$cep."', 
-				rua 		= '".$rua."', 
-				cidade 		= '".$cidade."', 
-				bairro 		= '".$bairro."', 
-				uf 			= '".$uf."', 
-				numero 		= '".$numero."' 
+			autonomo 	= '".$autonomo."', 
+			nome 		= '".$nomePessoa."', 
+			sobrenome 	= '".$sobrenomePessoa."', 
+			email 		= '".$email."', 
+			celular 	= '".$celular."', 
+			senha 		= '".$senha."', 
+			descricao	= '".$descricao."', 
+			cep 		= '".$cep."', 
+			rua 		= '".$rua."', 
+			cidade 		= '".$cidade."', 
+			bairro 		= '".$bairro."', 
+			uf 			= '".$uf."', 
+			numero 		= '".$numero."' 
 			WHERE idPessoa 	= '".$idPessoa."';
 			";
 			$query = $conn->query($qry);
@@ -201,5 +220,47 @@ class Pessoa
 		}
 		return $objetoPessoa;
 	}
+
+	public function getAutonomosProximos($classe){
+		include("../../config/connectionSQL.php");
+		$dadosValidos		=	true;
+		$idPessoa 			= 	0;
+		$idPessoa 			=	$classe->idPessoa;
+		$arrayDeAutonomos[]	=	Null;
+		if($idPessoa > 0){
+			$qry 				=	"select * from tbpessoa where idPessoa = '".$idPessoa."';";
+			$query 				=	$conn->query($qry);
+			$RowPes   			=   $query->fetch_array(MYSQLI_ASSOC);
+			$localizacaoPessoa	=	"";
+			$localizacaoPessoa	=	$RowPes["localizacao"];
+			$partesPes 			=	explode(",",$localizacaoPessoa);
+			if ($localizacaoPessoa != ""){
+				$qry = "select * from tbpessoa where autonomo = 'S' and idPessoa <> '".$idPessoa."' and localizacao is not null Order By cep DESC;";
+				$query = $conn->query($qry);
+				while($RowPes   =	$query->fetch_array(MYSQLI_ASSOC)){
+					$localizacaoAutonomo = $RowPes["localizacao"];
+					$partesAut 	=	explode(",",$localizacaoAutonomo);
+					$distancia	=	Null;
+					$distancia 	=	$classe->distancia($partesPes[0],$partesPes[1],$partesAut[0],$partesAut[1]);
+					if($distancia <= 30.00){
+						$strongNome 	=	"<strong>".$RowPes["nome"]."</strong>";
+						$cidade 		=	$RowPes["cidade"].",";
+						$estado 		=	$RowPes["uf"]."<br>";
+						$distan 		=	"Distancia de: ".$distancia."KM<br>";
+						$telefone		=	$RowPes["celular"];
+						$divAnexavel	=	'<div class="contact-box"><a class="row" href="#"><div class="col-4"><div class="text-center"><img alt="image" class="rounded-circle m-t-xs img-fluid" src="http://31.media.tumblr.com/16c5126fef72592182409a229621983a/tumblr_n2whpyRT6z1tollfpo1_1280.gif"></div></div><div class="col-8"><h3>'.$strongNome.'</h3><p><i class="fa fa-map-marker"></i>'.$cidade.''.$estado.''.$distan.'</p><address><abbr title="Phone">Contato:</abbr>'.$telefone.'</address></div></a></div>';
+						$arrayDeAutonomos[]	=	array(	'idAutonomo'		=>	$RowPes["idPessoa"],
+														'nomeAutonomo'		=>	$RowPes["nome"],
+														'distanciaAutonomo'	=>	$distancia,
+														'divAnexavel'		=>	$divAnexavel
+												);
+					}
+				}
+			}
+		}
+		$arrayFinal = json_encode($arrayDeAutonomos);
+		return $arrayFinal;
+	}
+
 }
- ?>
+?>

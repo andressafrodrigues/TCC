@@ -1,71 +1,64 @@
-// window.testeGeolocation = function() {
-//   if ("geolocation" in navigator) {
-//     navigator.geolocation.getCurrentPosition(function(posicao) {
-//        alert(posicao.coords.latitude + ', ' + posicao.coords.longitude); 
-//     });
-//   } else {
-//     alert('Seu navegador não suporta a Geolocation, lamento.');
-//   }
-// }
-$(document).ready(function() {
-// Call Geocode
-//geocode();
-
-// Get location form
-var locationForm = document.getElementById('location-form');
-
-// Listen for submiot
-locationForm.addEventListener('submit', geocode);
-function geocode(e){
-// Prevent actual submit
-e.preventDefault();
-var location = document.getElementById('location-input').value;
-$.ajax({
-  url: 'https://maps.googleapis.com/maps/api/geocode/json',
-  data:{
-    address:location,
-    key:'AIzaSyDszBEyHeAp1sInwk6775RjS63bah3j7rs'
-  },
-  dataType:"json",
-  type: 'GET',
-  cache: false,
-  async : true,
-  error: function(response){
-    console.log(response);
-  },
-  success: function(response) {
-    console.log(response);
-    var formattedAddress = response.results[0].formatted_address;
-    var formattedAddressOutput = `
-    <ul class="list-group">
-    <li class="list-group-item">${formattedAddress}</li>
-    </ul>
-    `;
-    var addressComponents = response.results[0].address_components;
-    var addressComponentsOutput = '<ul class="list-group">';
-    for(var i = 0;i < addressComponents.length;i++){
-      addressComponentsOutput += `
-      <li class="list-group-item"><strong>${addressComponents[i].types[0]}</strong>: ${addressComponents[i].long_name}</li>
-      `;
+function geocode(cep){
+  var location = cep;
+  var longLat = {latitude:"",longitude:""};
+  $.ajax({
+    url: 'https://maps.googleapis.com/maps/api/geocode/json',
+    data:{
+      address:location,
+      key:'AIzaSyDszBEyHeAp1sInwk6775RjS63bah3j7rs'
+    },
+    dataType:"json",
+    type: 'GET',
+    cache: false,
+    async : false,
+    error: function(response){
+      console.log(response);
+    },
+    success: function(response) {
+      var lat = response.results[0].geometry.location.lat;
+      var lng = response.results[0].geometry.location.lng;
+      longLat = {latitude:lat,longitude:lng};
     }
-    addressComponentsOutput += '</ul>';
-
-    var lat = response.results[0].geometry.location.lat;
-    var lng = response.results[0].geometry.location.lng;
-    var geometryOutput = `
-    <ul class="list-group">
-    <li class="list-group-item"><strong>Latitude</strong>: ${lat}</li>
-    <li class="list-group-item"><strong>Longitude</strong>: ${lng}</li>
-    </ul>
-    `;
-
-    document.getElementById('formatted-address').innerHTML = formattedAddressOutput;
-    document.getElementById('address-components').innerHTML = addressComponentsOutput;
-    document.getElementById('geometry').innerHTML = geometryOutput;
-  }
-});
+  });
+return longLat;
 }
 
+function getDistanceFromLatLonInKm(position1, position2) {
+    // "use strict";
+    var deg2rad = function (deg) { return deg * (Math.PI / 180); },
+        R = 6371,
+        dLat = deg2rad(position2.lat - position1.lat),
+        dLng = deg2rad(position2.lng - position1.lng),
+        a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+            + Math.cos(deg2rad(position1.lat))
+            * Math.cos(deg2rad(position1.lat))
+            * Math.sin(dLng / 2) * Math.sin(dLng / 2),
+        c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return ((R * c *1000).toFixed());
+}
 
-  
-});
+function exibeProximos30KM(){
+  pageurl = 'ajax/usuario/getAutonomos.php';
+  $.ajax({
+      url: pageurl,
+      data: null,
+      dataType: 'Json',
+      type: 'POST',
+      cache: false,
+      async : true,
+      error: function(ret){
+          swal("ERROU!","ERRRRRROOOOOOUUUUUU!","error");
+      },
+      success: function(ret){
+        for (i in ret) {
+          var autonomo = ret[i];
+          if (autonomo != null){
+            var div = document.createElement('div');
+            div.className = 'col-lg-4';
+            div.innerHTML = ret[i].divAnexavel;
+            document.getElementById('dadosAutonomos').appendChild(div);
+          }
+        }
+      }
+  });
+}

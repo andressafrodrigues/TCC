@@ -7,6 +7,7 @@
             </div>
             <div class="modal-body">
                 <form id="cadastroUser" action="" method="post" class="form-horizontal">
+                      <input type="hidden" class="form-control" name="localizacao" id="localizacao" required=""/>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Nome:</label>
                         <div class="col-sm-8">
