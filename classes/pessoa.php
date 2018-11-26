@@ -228,7 +228,7 @@ class Pessoa
 		$idPessoa 			=	$classe->idPessoa;
 		$arrayDeAutonomos[]	=	Null;
 		if($idPessoa > 0){
-			$qry 				=	"select * from tbpessoa where idPessoa = '".$idPessoa."';";
+			$qry 				=	"select * from tbpessoa where idPessoa = '".$idPessoa."' and autonomo = 'N'";
 			$query 				=	$conn->query($qry);
 			$RowPes   			=   $query->fetch_array(MYSQLI_ASSOC);
 			$localizacaoPessoa	=	"";
